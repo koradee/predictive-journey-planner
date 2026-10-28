@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 const links = [
   { id: 'home', label: 'Home' },
   { id: 'plan-journey', label: 'Plan Journey' },
+  { id: 'how-it-works', label: 'How It Works' },
   { id: 'about', label: 'About' },
 ]
 
@@ -45,11 +46,11 @@ export default function Navbar({ onNavigate, showingResults }) {
               <path d="M9 6h7a4 4 0 0 1 0 8H8a4 4 0 0 0 0 8h3" />
             </svg>
           </span>
-          <span>Predictive Journey Planner</span>
+          <span>JourneyIQ</span>
         </a>
         <div className="nav-links">
           {links.map(({ id, label }) => (
-            <a key={id} href={`#${id}`} className={!showingResults && active === id ? 'active' : ''}
+            <a key={id} href={`#${id}`} className={`${id === 'plan-journey' ? 'nav-cta' : ''} ${!showingResults && active === id ? 'active' : ''}`}
               aria-current={!showingResults && active === id ? 'location' : undefined}>
               {label}
             </a>

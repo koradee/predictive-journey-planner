@@ -63,7 +63,7 @@ export default function JourneyForm({ journey, onSaveJourney }) {
         <input id="departure-time" name="departureTime" type="time" required value={values.departureTime} onChange={handleChange} aria-invalid={Boolean(errors.departureTime)} aria-describedby={errors.departureTime ? 'time-error' : undefined} />
         {errors.departureTime && <p className="field-error" id="time-error" role="alert">{errors.departureTime}</p>}
       </div>
-      <div className="form-bottom"><span>Details stay in this session only. No predictions connected.</span><button className="button primary" type="submit">Save journey details <span aria-hidden="true">→</span></button></div>
+      <div className="form-bottom"><span>Your plans stay here until you refresh the page.</span><button className="button primary" type="submit">View Journey <span aria-hidden="true">→</span></button></div>
     </form>
   )
 }

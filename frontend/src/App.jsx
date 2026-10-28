@@ -27,6 +27,10 @@ export default function App() {
       <Navbar onNavigate={navigateHome} showingResults={showingResults} />
       <div hidden={showingResults}><Home journey={journey} onSaveJourney={saveJourney} /></div>
       {showingResults && <Results journey={journey} onEdit={() => navigateHome('plan-journey')} />}
+      <footer className="site-footer"><div className="container footer-content">
+        <div><strong>JourneyIQ</strong><p>Plan ahead. Travel smarter.</p></div>
+        <nav aria-label="Footer navigation">{[['home', 'Home'], ['plan-journey', 'Plan Journey'], ['how-it-works', 'How It Works'], ['about', 'About']].map(([id, label]) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); navigateHome(id) }}>{label}</a>)}</nav>
+      </div></footer>
     </>
   )
 }
