@@ -6,7 +6,7 @@ const links = [
   { id: 'about', label: 'About' },
 ]
 
-export default function Navbar() {
+export default function Navbar({ onNavigate, showingResults }) {
   const [active, setActive] = useState('home')
 
   useEffect(() => {
@@ -33,7 +33,10 @@ export default function Navbar() {
 
   return (
     <header className="site-header">
-      <nav className="container navbar" aria-label="Main navigation">
+      <nav className="container navbar" onClick={event => {
+        const link = event.target.closest('a[href^="#"]')
+        if (link) { event.preventDefault(); onNavigate(link.hash.slice(1)) }
+      }} aria-label="Main navigation">
         <a className="brand" href="#home">
           <span className="brand-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -46,8 +49,8 @@ export default function Navbar() {
         </a>
         <div className="nav-links">
           {links.map(({ id, label }) => (
-            <a key={id} href={`#${id}`} className={active === id ? 'active' : ''}
-              aria-current={active === id ? 'location' : undefined}>
+            <a key={id} href={`#${id}`} className={!showingResults && active === id ? 'active' : ''}
+              aria-current={!showingResults && active === id ? 'location' : undefined}>
               {label}
             </a>
           ))}

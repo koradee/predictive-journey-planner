@@ -1,5 +1,4 @@
-import RouteMap from './RouteMap.jsx'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 function localDate() {
   const today = new Date()
@@ -11,14 +10,7 @@ export default function JourneyForm({ journey, onSaveJourney }) {
     source: '', destination: '', travelDate: '', departureTime: '',
   })
   const [errors, setErrors] = useState({})
-  const [editing, setEditing] = useState(false)
-  const confirmationRef = useRef(null)
   const sourceRef = useRef(null)
-
-  useEffect(() => {
-    if (journey && !editing) confirmationRef.current?.focus()
-    if (editing) sourceRef.current?.focus()
-  }, [journey, editing])
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -47,27 +39,6 @@ export default function JourneyForm({ journey, onSaveJourney }) {
     }
 
     onSaveJourney({ source, destination, travelDate: values.travelDate, departureTime: values.departureTime })
-    setEditing(false)
-  }
-
-  if (journey && !editing) {
-    return (
-      <>
-      <section className="journey-confirmation" aria-labelledby="confirmation-title">
-        <h3 id="confirmation-title" tabIndex="-1" ref={confirmationRef}>Journey details saved for this session</h3>
-        <dl className="journey-details">
-          <div><dt>Source</dt><dd>{journey.source}</dd></div>
-          <div><dt>Destination</dt><dd>{journey.destination}</dd></div>
-          <div><dt>Travel date</dt><dd>{journey.travelDate}</dd></div>
-          <div><dt>Departure time</dt><dd>{journey.departureTime}</dd></div>
-        </dl>
-        <p><strong>Status:</strong> Journey details saved for this session</p>
-        <p>Route predictions will become available in a later stage. No travel times or route recommendations are generated. Refreshing this page clears the saved journey.</p>
-        <button type="button" className="button secondary" onClick={() => setEditing(true)}>Edit journey details</button>
-      </section>
-      <RouteMap key={JSON.stringify(journey)} journey={journey} />
-      </>
-    )
   }
 
   return (

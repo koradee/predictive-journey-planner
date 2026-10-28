@@ -126,3 +126,6 @@ input[aria-invalid="true"] { border-color: #b42318; }
 .map-column { min-width: 0; }
 .route-map { height: 420px; width: 100%; z-index: 0; border-radius: 10px; }
 @media (max-width: 768px) { .route-layout { grid-template-columns: 1fr; } .route-map { height: 340px; } }
+
+.results-page h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-top: 20px; overflow-wrap: anywhere; }
+.results-page h1:focus-visible { outline: 3px solid var(--blue); outline-offset: 6px; }

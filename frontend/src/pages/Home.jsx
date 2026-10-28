@@ -25,7 +25,7 @@ export default function Home({ journey, onSaveJourney }) {
               <a className="button primary" href="#plan-journey">Plan Your Journey <span aria-hidden="true">↗</span></a>
               <a className="button secondary" href="#how-it-works">How It Works <span aria-hidden="true">↓</span></a>
             </div>
-            <p className="hero-note"><span className="status-dot" /> Stage 4 · Schematic map demonstration</p>
+            <p className="hero-note"><span className="status-dot" /> Stage 5 · Journey overview demonstration</p>
           </div>
         </section>
 
