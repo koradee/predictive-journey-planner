@@ -25,7 +25,7 @@ export default function Home({ journey, onSaveJourney }) {
               <a className="button primary" href="#plan-journey">Plan Your Journey <span aria-hidden="true">↗</span></a>
               <a className="button secondary" href="#how-it-works">How It Works <span aria-hidden="true">↓</span></a>
             </div>
-            <p className="hero-note"><span className="status-dot" /> Stage 3 · Journey details only</p>
+            <p className="hero-note"><span className="status-dot" /> Stage 4 · Schematic map demonstration</p>
           </div>
         </section>
 
@@ -57,7 +57,7 @@ export default function Home({ journey, onSaveJourney }) {
 
         <section id="about" className="section container about-section">
           <div><span className="eyebrow">About the project</span><h2>Learning today.<br />Planning for tomorrow.</h2></div>
-          <div><p>Predictive Journey Planner Using AI for Future Traffic and Route Optimization is a final-year Information Technology academic project exploring how predictive models can support informed travel decisions.</p><p>This stage presents the homepage and session-only journey form using React and Vite. Future work will explore FastAPI, XGBoost, NetworkX, and OpenStreetMap. No AI model, routing engine, or map is connected yet.</p></div>
+          <div><p>Predictive Journey Planner Using AI for Future Traffic and Route Optimization is a final-year Information Technology academic project exploring how predictive models can support informed travel decisions.</p><p>This stage presents the homepage and session-only journey form using React and Vite. Future work will explore FastAPI, XGBoost, NetworkX, and OpenStreetMap. An OpenStreetMap basemap supports a schematic Pune route demonstration. No AI model or routing engine is connected yet.</p></div>
         </section>
       </main>
       <footer className="site-footer"><div className="container footer-content"><strong>Predictive Journey Planner</strong><span>A final-year IT academic project · Built for learning and exploration.</span></div></footer>

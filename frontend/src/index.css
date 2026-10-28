@@ -117,3 +117,12 @@ input[aria-invalid="true"] { border-color: #b42318; }
   html { scroll-behavior: auto; }
   .button, .feature-card { transition: none; }
 }
+
+.route-section { margin-top: 32px; }
+.route-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px; }
+.route-card { padding: 20px; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 16px; }
+.route-card h3 { margin-top: 16px; }
+.route-card.selected { border-color: var(--blue); background: #f1f6ff; }
+.map-column { min-width: 0; }
+.route-map { height: 420px; width: 100%; z-index: 0; border-radius: 10px; }
+@media (max-width: 768px) { .route-layout { grid-template-columns: 1fr; } .route-map { height: 340px; } }

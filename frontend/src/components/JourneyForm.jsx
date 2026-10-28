@@ -1,3 +1,4 @@
+import RouteMap from './RouteMap.jsx'
 import { useEffect, useRef, useState } from 'react'
 
 function localDate() {
@@ -51,6 +52,7 @@ export default function JourneyForm({ journey, onSaveJourney }) {
 
   if (journey && !editing) {
     return (
+      <>
       <section className="journey-confirmation" aria-labelledby="confirmation-title">
         <h3 id="confirmation-title" tabIndex="-1" ref={confirmationRef}>Journey details saved for this session</h3>
         <dl className="journey-details">
@@ -63,6 +65,8 @@ export default function JourneyForm({ journey, onSaveJourney }) {
         <p>Route predictions will become available in a later stage. No travel times or route recommendations are generated. Refreshing this page clears the saved journey.</p>
         <button type="button" className="button secondary" onClick={() => setEditing(true)}>Edit journey details</button>
       </section>
+      <RouteMap key={JSON.stringify(journey)} journey={journey} />
+      </>
     )
   }
 
