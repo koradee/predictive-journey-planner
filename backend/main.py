@@ -85,6 +85,9 @@ async def routing_error_handler(request, exc: RoutingError):
 
 
 @app.get("/api/health", response_model=HealthResponse)
+@app.get("/health", response_model=HealthResponse)
+@app.get("/", response_model=HealthResponse)
+@app.get("/api", response_model=HealthResponse)
 async def get_health():
     """Liveness probe to confirm backend is running."""
     return HealthResponse(
@@ -95,6 +98,7 @@ async def get_health():
 
 
 @app.get("/api/ready", response_model=ReadyResponse)
+@app.get("/ready", response_model=ReadyResponse)
 async def get_ready():
     """Readiness probe to confirm actual Pune OSM routing data is verified and loaded."""
     info = routing_service.check_readiness()
@@ -118,6 +122,7 @@ async def get_ready():
 
 
 @app.post("/api/routes", response_model=RouteResponse)
+@app.post("/routes", response_model=RouteResponse)
 async def post_routes(req: RouteRequest):
     """
     Calculate real Pune road-network routes between source and destination.

@@ -35,16 +35,39 @@ SUPPORTED_LOCATIONS: Dict[str, Tuple[float, float]] = {
 
 class RoutingService:
     def __init__(self, root_dir: Optional[Path] = None):
+        self._custom_root = root_dir is not None
         self.root_dir = root_dir or ROOT
         self._graph: Optional[nx.MultiDiGraph] = None
 
     @property
     def raw_data_path(self) -> Path:
-        return self.root_dir / "data/raw/pune-osm/roads.json"
+        if self._custom_root:
+            return self.root_dir / "data/raw/pune-osm/roads.json"
+        candidates = [
+            self.root_dir / "data/raw/pune-osm/roads.json",
+            Path.cwd() / "data/raw/pune-osm/roads.json",
+            Path(__file__).resolve().parents[1] / "data/raw/pune-osm/roads.json",
+            Path(__file__).resolve().parents[2] / "data/raw/pune-osm/roads.json",
+        ]
+        for p in candidates:
+            if p.is_file():
+                return p
+        return candidates[0]
 
     @property
     def manifest_path(self) -> Path:
-        return self.root_dir / "data/pune-osm-manifest.json"
+        if self._custom_root:
+            return self.root_dir / "data/pune-osm-manifest.json"
+        candidates = [
+            self.root_dir / "data/pune-osm-manifest.json",
+            Path.cwd() / "data/pune-osm-manifest.json",
+            Path(__file__).resolve().parents[1] / "data/pune-osm-manifest.json",
+            Path(__file__).resolve().parents[2] / "data/pune-osm-manifest.json",
+        ]
+        for p in candidates:
+            if p.is_file():
+                return p
+        return candidates[0]
 
     def check_readiness(self) -> Dict:
         """Verifies OSM data and manifest integrity without crashing."""
