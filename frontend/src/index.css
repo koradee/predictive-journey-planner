@@ -160,3 +160,9 @@ input[aria-invalid="true"] { border-color: #b42318; }
   .route-map.leaflet-zoom-anim .leaflet-zoom-animated,
   .route-map.leaflet-fade-anim .leaflet-popup { transition: none; }
 }
+.loading-banner { background: #f0f6ff; border: 1px solid #bfd5fb; border-radius: 10px; padding: 24px; margin-top: 24px; text-align: center; }
+.loading-banner h2 { font-size: 1.4rem; margin-bottom: 8px; }
+.error-banner { background: #fff5f5; border: 1px solid #fecdd3; border-radius: 10px; padding: 24px; margin-top: 24px; }
+.error-banner h2 { color: #b91c1c; font-size: 1.4rem; margin-bottom: 8px; }
+.error-banner p { color: #7f1d1d; }
+.error-actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
