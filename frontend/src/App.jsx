@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useState } from 'react'
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
 import Results from './pages/Results.jsx'
+import { navigationLinks } from './data/navigation.js'
 
 function readLocation(hasJourney) {
   if (window.location.hash === '#results' && !hasJourney) {
@@ -64,7 +65,7 @@ export default function App() {
       {showingResults && <Results journey={journey} onEdit={() => navigateHome('plan-journey')} />}
       <footer className="site-footer"><div className="container footer-content">
         <div><strong>Predictive Journey Planner</strong><p>Plan ahead. Travel smarter.</p></div>
-        <nav aria-label="Footer navigation">{[['home', 'Home'], ['plan-journey', 'Plan Journey'], ['how-it-works', 'How It Works'], ['about', 'About']].map(([id, label]) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); navigateHome(id) }}>{label}</a>)}</nav>
+        <nav aria-label="Footer navigation">{navigationLinks.map(({ id, label }) => <a key={id} href={`#${id}`} onClick={event => { event.preventDefault(); navigateHome(id) }}>{label}</a>)}</nav>
       </div></footer>
     </>
   )

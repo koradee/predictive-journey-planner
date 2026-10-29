@@ -1,9 +1,6 @@
 import { useState } from 'react'
 
-function localDate() {
-  const today = new Date()
-  return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-}
+import { localDate, validateJourney } from '../utils/journey.js'
 
 export default function JourneyForm({ journey, onSaveJourney }) {
   const [values, setValues] = useState(journey ?? {
@@ -18,31 +15,7 @@ export default function JourneyForm({ journey, onSaveJourney }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    const source = values.source.trim().replace(/\s+/g, ' ')
-    const destination = values.destination.trim().replace(/\s+/g, ' ')
-    const nextErrors = {}
-
-    if (!source) nextErrors.source = 'Enter a starting location, not just spaces.'
-    if (!destination) nextErrors.destination = 'Enter a destination, not just spaces.'
-    if (source && destination && source.toLowerCase() === destination.toLowerCase()) {
-      nextErrors.destination = 'Destination must be different from the starting location.'
-    }
-    if (!values.travelDate) nextErrors.travelDate = 'Choose a travel date.'
-    else if (values.travelDate < localDate()) nextErrors.travelDate = 'Travel date cannot be in the past.'
-    if (!values.departureTime) nextErrors.departureTime = 'Choose a departure time.'
-    if (values.travelDate && values.departureTime) {
-      const [year, month, day] = values.travelDate.split('-').map(Number)
-      const [hours, minutes] = values.departureTime.split(':').map(Number)
-      // Numeric constructor uses the user's local timezone, not UTC.
-      const departure = new Date(year, month - 1, day, hours, minutes)
-      if (!Number.isFinite(departure.getTime()) || departure.getFullYear() !== year ||
-          departure.getMonth() !== month - 1 || departure.getDate() !== day ||
-          departure.getHours() !== hours || departure.getMinutes() !== minutes) {
-        nextErrors.departureTime = 'Choose a valid local travel date and departure time.'
-      } else if (departure.getTime() <= Date.now()) {
-        nextErrors.departureTime = 'Choose a departure date and time in the future.'
-      }
-    }
+    const { errors: nextErrors, journey: validatedJourney } = validateJourney(values)
 
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length) {
@@ -50,7 +23,7 @@ export default function JourneyForm({ journey, onSaveJourney }) {
       return
     }
 
-    onSaveJourney({ source, destination, travelDate: values.travelDate, departureTime: values.departureTime })
+    onSaveJourney(validatedJourney)
   }
 
   return (

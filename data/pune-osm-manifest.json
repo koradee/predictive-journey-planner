@@ -1,0 +1,20 @@
+{
+  "source": "OpenStreetMap contributors via Overpass API",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:60];way[\"highway\"](18.510,73.825,18.550,73.895)->.roads;(.roads;node(w.roads);rel(bw.roads)[\"type\"=\"restriction\"];);out body;",
+  "bbox_south_west_north_east": [
+    18.51,
+    73.825,
+    18.55,
+    73.895
+  ],
+  "crs": "EPSG:4326",
+  "retrieved_at_utc": "2026-10-29T12:11:55.692228+00:00",
+  "osm_base_timestamp": "2026-10-29T12:10:06Z",
+  "sha256": "3e5f7d34904cb6e4144440eceddd07320644eea46992f708feffae90b7970eca",
+  "bytes": 3766932,
+  "license": "ODbL 1.0",
+  "attribution": "OpenStreetMap contributors",
+  "license_url": "https://www.openstreetmap.org/copyright",
+  "local_file": "data/raw/pune-osm/roads.json"
+}

@@ -1,6 +1,8 @@
 # Installed packages and generated production files
 node_modules/
 dist/
+dist-ssr/
+coverage/
 
 # Local settings and logs
 .env
@@ -8,6 +10,17 @@ dist/
 !.env.example
 *.local
 *.log
+logs/
+
+# Editor settings and temporary files
+**/.vscode/*
+!**/.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Operating system files
 .DS_Store

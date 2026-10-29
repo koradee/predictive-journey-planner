@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const links = [
-  { id: 'home', label: 'Home' },
-  { id: 'plan-journey', label: 'Plan Journey' },
-  { id: 'how-it-works', label: 'How It Works' },
-  { id: 'about', label: 'About' },
-]
+import { navigationLinks } from '../data/navigation.js'
 
 export default function Navbar({ onNavigate, showingResults }) {
   const [active, setActive] = useState('home')
@@ -17,7 +12,7 @@ export default function Navbar({ onNavigate, showingResults }) {
         return
       }
       const marker = window.scrollY + (window.innerWidth <= 600 ? 160 : 112)
-      const current = [...links].reverse().find(({ id }) => {
+      const current = [...navigationLinks].reverse().find(({ id }) => {
         const section = document.getElementById(id)
         return section && section.offsetTop <= marker
       })
@@ -49,7 +44,7 @@ export default function Navbar({ onNavigate, showingResults }) {
           <span>Predictive Journey Planner</span>
         </a>
         <div className="nav-links">
-          {links.map(({ id, label }) => (
+          {navigationLinks.map(({ id, label }) => (
             <a key={id} href={`#${id}`} className={`${id === 'plan-journey' ? 'nav-cta' : ''} ${!showingResults && active === id ? 'active' : ''}`}
               aria-current={!showingResults && active === id ? 'location' : undefined}>
               {label}
