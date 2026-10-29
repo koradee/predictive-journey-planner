@@ -55,7 +55,7 @@ h1 span { color: var(--blue); }
 .journey-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
 .field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 label { font-size: .88rem; font-weight: 650; }
-input { width: 100%; min-width: 0; height: 50px; border: 1px solid #cbd6e4; border-radius: 7px; padding: 10px 14px; background: #fff; color: #152a45; color-scheme: light; }
+input { width: 100%; min-width: 0; height: 50px; border: 1px solid #7b8b9f; border-radius: 7px; padding: 10px 14px; background: #fff; color: #152a45; color-scheme: light; }
 input::placeholder { color: #6a788c; }
 .form-bottom { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 5px; }
 .form-bottom > span { font-size: .8rem; color: var(--muted); }
@@ -116,6 +116,8 @@ input[aria-invalid="true"] { border-color: #b42318; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .button, .feature-card { transition: none; }
+  .route-map.leaflet-zoom-anim .leaflet-zoom-animated,
+  .route-map.leaflet-fade-anim .leaflet-popup { transition: none; }
 }
 
 .route-section { margin-top: 32px; }
@@ -130,7 +132,7 @@ input[aria-invalid="true"] { border-color: #b42318; }
 .results-page h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-top: 20px; overflow-wrap: anywhere; }
 .results-page h1:focus-visible { outline: 3px solid var(--blue); outline-offset: 6px; }
 
-/* JourneyIQ product layout */
+/* Predictive Journey Planner product layout */
 .hero { padding-block: 52px; }
 .hero-content { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 48px; }
 .hero h1 { font-size: clamp(2.7rem, 5.5vw, 4.6rem); margin-bottom: 20px; }

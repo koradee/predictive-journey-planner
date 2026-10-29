@@ -46,7 +46,7 @@ export default function Navbar({ onNavigate, showingResults }) {
               <path d="M9 6h7a4 4 0 0 1 0 8H8a4 4 0 0 0 0 8h3" />
             </svg>
           </span>
-          <span>JourneyIQ</span>
+          <span>Predictive Journey Planner</span>
         </a>
         <div className="nav-links">
           {links.map(({ id, label }) => (

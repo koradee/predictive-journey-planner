@@ -1,10 +1,10 @@
-# Predictive Journey Planner
+# Predictive Journey Planner Using AI for Future Traffic and Route Optimization
 
 An Information Technology final-year project for predicting future traffic and optimizing routes using AI.
 
-## Stage 2: homepage and navbar
+## Current application
 
-The project contains a responsive React + Vite JavaScript homepage with section navigation, a journey input preview, planned feature descriptions, and project information. Submitting the form shows a later-stage notice; it does not produce predictions. Backend, machine learning, data, maps, and route planning remain future work.
+The Predictive Journey Planner frontend provides journey validation, an editable journey overview, and an interactive map of illustrative Pune corridors. Journey details remain in memory until refresh. Browser Back and Forward navigate between Home sections and Results; opening or refreshing Results without journey details returns to the form. Backend, machine learning, and live route prediction remain future work.
 
 ## Run on Windows
 
@@ -48,6 +48,6 @@ npm run lint
 
 The application uses JavaScript. React type definitions supplied by the template help editor suggestions; they do not make this a TypeScript project.
 
-## JourneyIQ interface
+## Predictive Journey Planner interface
 
-The public interface uses the JourneyIQ brand. The React/Vite frontend preserves validated, session-only journey state and a Results view. React Leaflet renders predefined schematic Pune corridors; these are not verified road directions. No traffic predictions, durations, distances, delays, or arrival times are calculated. Backend and ML integration remain future work. Refreshing clears saved details.
+The public interface uses the Predictive Journey Planner brand. The React/Vite frontend preserves validated, session-only journey state and a Results view. React Leaflet renders predefined schematic Pune corridors; these are not verified road directions. No traffic predictions, durations, distances, delays, or arrival times are calculated. Backend and ML integration remain future work. Refreshing clears saved details.

@@ -56,6 +56,6 @@ export default function Home({ journey, onSaveJourney }) {
       <div className="centered-heading"><span className="eyebrow">How it works</span><h2>A few details. A fresh perspective.</h2><p>From your first idea to a journey overview in four simple steps.</p></div>
       <ol className="steps">{steps.map(([title,description],index) => <li key={title}><span className="step-number" aria-hidden="true">{index+1}</span><h3>{title}</h3><p>{description}</p></li>)}</ol>
     </div></section>
-    <section id="about" className="section container about-section"><div><span className="eyebrow">Meet JourneyIQ</span><h2>Smarter Planning for Every Journey</h2></div><p>JourneyIQ brings journey details, route exploration, and travel planning into one simple experience. Our goal is to help travelers explore their options and plan with greater confidence.</p></section>
+    <section id="about" className="section container about-section"><div><span className="eyebrow">Meet Predictive Journey Planner</span><h2>Smarter Planning for Every Journey</h2></div><p>Predictive Journey Planner brings journey details, route exploration, and travel planning into one simple experience. Our goal is to help travelers explore their options and plan with greater confidence.</p></section>
   </main>
 }
