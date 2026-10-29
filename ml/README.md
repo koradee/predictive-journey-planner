@@ -1,6 +1,6 @@
 # Traffic data inspection
 
-This directory contains Stage 7 CSV inspection and Stage 8A METR-LA validation tools for **Predictive Journey Planner Using AI for Future Traffic and Route Optimization**. There is no trained model, preprocessing pipeline, API or database.
+This directory contains Stage 7 CSV inspection and Stage 8A METR-LA validation tools for **Predictive Journey Planner Using AI for Future Traffic and Route Optimization**. Stage 8B adds fitted research baselines and development-only validation; XGBoost and final-test evaluation remain blocked. There is no API or database.
 
 - [Dataset feasibility and recommendation](../docs/dataset-feasibility.md)
 - [ML target, evaluation and routing specification](../docs/ml-problem-specification.md)
@@ -9,7 +9,7 @@ This directory contains Stage 7 CSV inspection and Stage 8A METR-LA validation t
 
 ## Requirements
 
-For the Stage 7 CSV inspector, use Python **3.11 or newer**. That inspector uses only the standard library; `requirements.txt` deliberately lists no third-party packages. The separate Stage 8A HDF validator uses NumPy and h5py, pinned in `requirements-metr-la.txt` (Python 3.12+ for the current NumPy pin). These packages were already installed in the validation environment. XGBoost is a proposed later baseline, not an installed dependency.
+For the Stage 7 CSV inspector, use Python **3.11 or newer**. That inspector uses only the standard library; `requirements.txt` deliberately lists no third-party packages. The separate Stage 8A HDF validator uses NumPy and h5py, pinned in `requirements-metr-la.txt` (Python 3.12+ for the current NumPy pin). These packages were already installed in the validation environment. XGBoost remains uninstalled pending clarification of the frozen rolling-feature contract.
 
 From the repository root:
 
@@ -54,3 +54,14 @@ The validator checks HDF structure, numeric readings, timestamp grid, zero/nonfi
 Omit `--output` to print JSON; supplied output must be outside raw/source directories and cannot overwrite an input. Exit 0 means integrity validation succeeded; missing inputs/arguments return 2 and format/integrity failures return 3. [The evaluation protocol](metr_la_protocol.json) remains conditional on measurement-use terms and explicit unit/clock qualifications. The generated full quality report is ignored. On a fresh checkout without raw files, integration tests explicitly skip; download data before claiming a successful validation run.
 
 Frontend checks remain in `frontend/`: `npm test`, `npm run lint`, `npm run build`. See the feasibility and Stage 8A reports for unresolved data limitations before attempting any training.
+
+## Stage 8B: development baselines (partial)
+
+See [the evaluation report and blocker](../docs/metr-la-evaluation.md) for actual validation results, provenance, scope limitations and required next steps. `forecasting.py` implements persistence, training-only historical averages, masked metrics and validated non-pickle artifact loading. `evaluate_metr_la.py` revalidates all source hashes and the frozen protocol before fitting; it exposes validation only and never scores final test targets.
+
+```sh
+python -m unittest discover -s ml -p "test_*.py" -v
+python ml/evaluate_metr_la.py --run-name stage8b-baselines
+```
+
+Run names must be new: existing artifacts are not overwritten. Artifacts and detailed aggregate reports remain ignored under `data/processed/<run-name>/`. No new dependencies are needed beyond `requirements-metr-la.txt`. XGBoost fitting is blocked because the frozen protocol does not enumerate its rolling-summary operators; no feature set was invented and no final method has been selected. This is an offline Los Angeles sensor-speed benchmark, not Pune prediction or routing functionality.
