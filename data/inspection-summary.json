@@ -1,0 +1,292 @@
+{
+  "inspected_on": "2026-10-29",
+  "dataset_doi": "10.17632/xnf2k6n288.1",
+  "archive_sha256": "648e9c33dfa8feeb48c8f3d25abff7625c8c69e117324cdf20254c566ccd03c4",
+  "archive_csv_members": 115,
+  "archive_uncompressed_csv_bytes": 1812118340,
+  "scope": "Three complete CSV members inspected; remaining members inventoried only. No dataset-wide row count or quality claim. No preprocessing or training.",
+  "reports": [
+    {
+      "file": "traffic/AlankarChowk/a2/a2_11.csv",
+      "rows": 877100,
+      "columns": [
+        "Time",
+        "Direction",
+        "car",
+        "motorbike",
+        "bus",
+        "truck"
+      ],
+      "types_observed": {
+        "Time": {
+          "string": 875220
+        },
+        "Direction": {
+          "string": 875220
+        },
+        "car": {
+          "integer": 875220
+        },
+        "motorbike": {
+          "integer": 875220
+        },
+        "bus": {
+          "integer": 875220
+        },
+        "truck": {
+          "integer": 875220
+        }
+      },
+      "missing_values": {
+        "Time": 1880,
+        "Direction": 1880,
+        "car": 1880,
+        "motorbike": 1880,
+        "bus": 1880,
+        "truck": 1880
+      },
+      "numeric_ranges": {
+        "car": [
+          0.0,
+          284.0
+        ],
+        "motorbike": [
+          0.0,
+          268.0
+        ],
+        "bus": [
+          0.0,
+          88.0
+        ],
+        "truck": [
+          0.0,
+          79.0
+        ]
+      },
+      "malformed_rows": 0,
+      "duplicate_rows": 840756,
+      "duplicate_timestamp_direction_keys": 840208,
+      "invalid_count_values": 0,
+      "directions": {
+        "UP": 218805,
+        "DOWN": 218805,
+        "RIGHT": 218805,
+        "LEFT": 218805,
+        "": 1880
+      },
+      "invalid_directions": 1880,
+      "timestamp_column": "Time",
+      "collection_date_from_filename": "2023-01-11",
+      "timezone": "not encoded in CSV; confirm source timezone before modeling",
+      "timestamp_min": "2023-01-11T09:00:34",
+      "timestamp_max": "2023-01-11T11:26:26",
+      "unique_timestamps": 8753,
+      "invalid_timestamps": 1880,
+      "backward_steps_within_direction": 0,
+      "observed_step_seconds_within_direction": {
+        "0.0": 840208,
+        "1.0": 35008
+      },
+      "candidate_targets": [
+        "car",
+        "motorbike",
+        "bus",
+        "truck"
+      ],
+      "warnings": [
+        "Vehicle counts are not speed or travel-time labels; do not convert counts to travel time.",
+        "Repeated time/direction keys require review; do not blindly deduplicate or sum.",
+        "Repeated second-resolution timestamps observed; do not assume independent five-minute observations.",
+        "Missing, malformed, or invalid values detected; review the quality counters before defining labels."
+      ]
+    },
+    {
+      "file": "traffic/JehangirChowk/j3/j3_16_one.csv",
+      "rows": 184500,
+      "columns": [
+        "Time",
+        "Direction",
+        "car",
+        "motorbike",
+        "bus",
+        "truck"
+      ],
+      "types_observed": {
+        "Time": {
+          "string": 184488
+        },
+        "Direction": {
+          "string": 184488
+        },
+        "car": {
+          "integer": 184488
+        },
+        "motorbike": {
+          "integer": 184488
+        },
+        "bus": {
+          "integer": 184488
+        },
+        "truck": {
+          "integer": 184488
+        }
+      },
+      "missing_values": {
+        "Time": 12,
+        "Direction": 12,
+        "car": 12,
+        "motorbike": 12,
+        "bus": 12,
+        "truck": 12
+      },
+      "numeric_ranges": {
+        "car": [
+          0.0,
+          295.0
+        ],
+        "motorbike": [
+          0.0,
+          400.0
+        ],
+        "bus": [
+          0.0,
+          40.0
+        ],
+        "truck": [
+          0.0,
+          85.0
+        ]
+      },
+      "malformed_rows": 0,
+      "duplicate_rows": 176101,
+      "duplicate_timestamp_direction_keys": 177108,
+      "invalid_count_values": 0,
+      "directions": {
+        "UP": 46122,
+        "DOWN": 46122,
+        "RIGHT": 46122,
+        "LEFT": 46122,
+        "": 12
+      },
+      "invalid_directions": 12,
+      "timestamp_column": "Time",
+      "collection_date_from_filename": "2023-01-16",
+      "timezone": "not encoded in CSV; confirm source timezone before modeling",
+      "timestamp_min": "2023-01-16T11:28:30",
+      "timestamp_max": "2023-01-16T11:59:14",
+      "unique_timestamps": 1845,
+      "invalid_timestamps": 12,
+      "backward_steps_within_direction": 0,
+      "observed_step_seconds_within_direction": {
+        "0.0": 177108,
+        "1.0": 7376
+      },
+      "candidate_targets": [
+        "car",
+        "motorbike",
+        "bus",
+        "truck"
+      ],
+      "warnings": [
+        "Vehicle counts are not speed or travel-time labels; do not convert counts to travel time.",
+        "Repeated time/direction keys require review; do not blindly deduplicate or sum.",
+        "Repeated second-resolution timestamps observed; do not assume independent five-minute observations.",
+        "Missing, malformed, or invalid values detected; review the quality counters before defining labels."
+      ]
+    },
+    {
+      "file": "traffic/RTOChowk/r1/r1_18_one.csv",
+      "rows": 177560,
+      "columns": [
+        "Time",
+        "Direction",
+        "car",
+        "motorbike",
+        "bus",
+        "truck"
+      ],
+      "types_observed": {
+        "Time": {
+          "string": 177516
+        },
+        "Direction": {
+          "string": 177516
+        },
+        "car": {
+          "integer": 177516
+        },
+        "motorbike": {
+          "integer": 177516
+        },
+        "bus": {
+          "integer": 177516
+        },
+        "truck": {
+          "integer": 177516
+        }
+      },
+      "missing_values": {
+        "Time": 44,
+        "Direction": 44,
+        "car": 44,
+        "motorbike": 44,
+        "bus": 44,
+        "truck": 44
+      },
+      "numeric_ranges": {
+        "car": [
+          0.0,
+          172.0
+        ],
+        "motorbike": [
+          0.0,
+          83.0
+        ],
+        "bus": [
+          0.0,
+          28.0
+        ],
+        "truck": [
+          0.0,
+          71.0
+        ]
+      },
+      "malformed_rows": 0,
+      "duplicate_rows": 169320,
+      "duplicate_timestamp_direction_keys": 169796,
+      "invalid_count_values": 0,
+      "directions": {
+        "UP": 44379,
+        "DOWN": 44379,
+        "RIGHT": 44379,
+        "LEFT": 44379,
+        "": 44
+      },
+      "invalid_directions": 44,
+      "timestamp_column": "Time",
+      "collection_date_from_filename": "2023-01-18",
+      "timezone": "not encoded in CSV; confirm source timezone before modeling",
+      "timestamp_min": "2023-01-18T11:28:34",
+      "timestamp_max": "2023-01-18T12:00:43",
+      "unique_timestamps": 1930,
+      "invalid_timestamps": 44,
+      "backward_steps_within_direction": 0,
+      "observed_step_seconds_within_direction": {
+        "0.0": 169796,
+        "1.0": 7716
+      },
+      "candidate_targets": [
+        "car",
+        "motorbike",
+        "bus",
+        "truck"
+      ],
+      "warnings": [
+        "Vehicle counts are not speed or travel-time labels; do not convert counts to travel time.",
+        "Repeated time/direction keys require review; do not blindly deduplicate or sum.",
+        "Repeated second-resolution timestamps observed; do not assume independent five-minute observations.",
+        "Missing, malformed, or invalid values detected; review the quality counters before defining labels."
+      ]
+    }
+  ]
+}

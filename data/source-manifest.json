@@ -1,0 +1,27 @@
+{
+  "dataset_doi": "10.17632/xnf2k6n288.1",
+  "version": 1,
+  "verified_on": "2026-10-29",
+  "source": "https://data.mendeley.com/datasets/xnf2k6n288/1",
+  "license_as_published": "CC BY 4.0",
+  "files": [
+    {
+      "filename": "data_dictionary.csv",
+      "bytes": 648,
+      "sha256": "5205af4d4959a2cb1864663d06cff8be0a56be599922e53513dd5b9c51ea3ddc",
+      "url": "https://data.mendeley.com/public-files/datasets/xnf2k6n288/files/713bf569-9e37-4ef2-af25-43ba5f7099ad/file_downloaded"
+    },
+    {
+      "filename": "README.docx",
+      "bytes": 32121,
+      "sha256": "18b4d0a40cec675a9773b10aca8937d983a7d1c9395d5c2b5a84f89068a5f678",
+      "url": "https://data.mendeley.com/public-files/datasets/xnf2k6n288/files/83175ec7-5e8e-4ed0-bffb-c86b5921503e/file_downloaded"
+    },
+    {
+      "filename": "traffic.zip",
+      "bytes": 15582506,
+      "sha256": "648e9c33dfa8feeb48c8f3d25abff7625c8c69e117324cdf20254c566ccd03c4",
+      "url": "https://data.mendeley.com/public-files/datasets/xnf2k6n288/files/bff98c05-cad1-4978-862b-c455b437122a/file_downloaded"
+    }
+  ]
+}
