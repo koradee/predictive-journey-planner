@@ -143,3 +143,4 @@ async def post_routes(req: RouteRequest):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Route calculation failed: {str(exc)}",
         )
+

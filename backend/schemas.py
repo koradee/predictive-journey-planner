@@ -107,3 +107,4 @@ class ReadyResponse(BaseModel):
     bbox: Optional[List[float]] = None
     sha256: Optional[str] = None
     error: Optional[str] = None
+

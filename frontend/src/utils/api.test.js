@@ -104,3 +104,4 @@ test('calculateRoutes normalizes geometry and coordinates', async () => {
     globalThis.fetch = originalFetch
   }
 })
+
