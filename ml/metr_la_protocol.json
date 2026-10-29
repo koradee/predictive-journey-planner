@@ -1,0 +1,80 @@
+{
+  "id": "metr-la-speed-v1",
+  "frozen_on": "2026-10-29",
+  "status": "conditional research protocol; source timezone, native unit metadata and measurement-use rights remain unresolved",
+  "source_sha256": "64784b76d6fb8ec9bff4b6decafb354da2bb37840468fdccee5044e511277c05",
+  "expected_shape": [
+    34272,
+    207
+  ],
+  "native_timestamp_start": "2012-03-01T00:00:00",
+  "native_timestamp_end_inclusive": "2012-06-27T23:55:00",
+  "timestamp_basis": "Naive release timestamps; no timezone localization or DST correction. Calendar features are release-clock features, not verified local wall-clock features.",
+  "cadence_seconds": 300,
+  "target": "Sensor speed value at issue timestamp + horizon, in native release speed units",
+  "unit_convention": "mph in published benchmark literature; HDF does not encode units; do not claim file-level confirmation or convert units without provider confirmation",
+  "target_validity": "finite and > 0; zero is unavailable under author benchmark convention, not confirmed stopped traffic",
+  "horizons_steps": [
+    3,
+    6,
+    12
+  ],
+  "history_steps": 12,
+  "splits": [
+    {
+      "name": "train",
+      "start_inclusive": "2012-03-01T00:00:00",
+      "end_exclusive": "2012-05-23T07:10:00"
+    },
+    {
+      "name": "validation",
+      "start_inclusive": "2012-05-23T07:10:00",
+      "end_exclusive": "2012-06-04T04:45:00"
+    },
+    {
+      "name": "test",
+      "start_inclusive": "2012-06-04T04:45:00",
+      "end_exclusive": "2012-06-28T00:00:00"
+    }
+  ],
+  "issue_rule": "All horizons share issue times: at least 12 historical ticks ending at t; t+60 minutes must remain strictly before the split end. Validation/test may use already released preceding split observations as lag context.",
+  "availability_assumption": "Offline issue time occurs after observing the release value at t; source publication latency and aggregation start/end semantics are unknown, so no live-service claim.",
+  "features": [
+    "sensor_id",
+    "release-clock target weekday and five-minute slot",
+    "last 12 readings ending at issue time with explicit missing masks",
+    "causal rolling statistics over that history only"
+  ],
+  "excluded_features": [
+    "future observations",
+    "actual future weather",
+    "incidents without dated availability",
+    "road attributes without validated joins"
+  ],
+  "missing_features": "Keep NaN plus missing masks for XGBoost; causal summaries ignore invalid readings; any imputation medians fit training only. No backfill or interpolation from the future.",
+  "persistence": "Most recent positive finite reading within the 12-step history; otherwise training-only sensor median, then global training median; report fallback coverage.",
+  "historical_average": "Training-only mean for sensor/target weekday/five-minute slot; fallback to sensor/target weekday/hour mean, sensor median, global training median. Never update with validation/test targets.",
+  "xgboost_candidate": {
+    "class": "XGBRegressor",
+    "objective": "reg:squarederror",
+    "n_estimators": 300,
+    "max_depth": 4,
+    "learning_rate": 0.05,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "reg_lambda": 1.0,
+    "tree_method": "hist",
+    "random_state": 42,
+    "n_jobs": 1,
+    "early_stopping": false,
+    "tuning": "None for the first frozen candidate; any development tuning must use validation only and be recorded before final test scoring."
+  },
+  "metrics": [
+    "MAE",
+    "RMSE"
+  ],
+  "metric_units": "Native release units; mph interpretation is literature-supported but not HDF-verified",
+  "mape": "Not a primary metric; no zero-denominator manipulation",
+  "peak_definition": "Target release-clock weekday Mon-Fri 07:00-09:00 or 16:00-19:00, half-open windows. Off-peak is the complement. These are fixed benchmark strata, not asserted verified LA local peaks.",
+  "reproducibility": "Record data/metadata hashes, protocol hash, code commit, exact package versions and seed. Freeze train-only mappings/fallbacks and candidate before scoring test. No training occurred in Stage 8A."
+}

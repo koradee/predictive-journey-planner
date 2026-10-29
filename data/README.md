@@ -46,13 +46,21 @@ python ml/data_inspection.py data/raw/pune-counts-v1/traffic.zip --member traffi
 
 The three fully inspected members are listed in `inspection-summary.json`. All other archive members were inventoried, not scanned for row quality. Rerun the inspector for each selected member to reproduce its report. Omitting `--member` scans every CSV member and can take substantially longer. Raw source files must retain their original hashes after inspection.
 
+## Stage 8A: acquired METR-LA
+
+METR-LA was acquired directly from the author-linked Google Drive folder on 29 October 2026; no mirror was needed. [The separate METR-LA manifest](metr-la-manifest.json) pins source URLs, author repository revision, file sizes and hashes. Store its HDF, `graph_sensor_ids.txt`, `graph_sensor_locations.csv`, and `distances_la_2012.csv` under ignored `data/raw/metr-la/`. The manifest also identifies cached author README/license and masking-code evidence; none of those raw files are committed.
+
+Download the exact public URLs in that manifest. Verify byte lengths and SHA-256 values before running the [HDF validator](../ml/README.md#stage-8a-metr-la-hdf-validation). The HDF file is 57,038,056 bytes. Metadata URLs are pinned to author revision `602afd9d767d3aa1c9b3eac51710d6aeee12c227`. Public Drive retrieval worked without credentials; future quotas or access requirements may change. Do not silently substitute a mirror or overwrite source files with an HTML download page.
+
+The full generated quality report belongs in ignored `data/processed/metr-la-quality.json`. [Stage 8A findings and exact evaluation boundaries](../docs/metr-la-validation.md) distinguish observed integrity from unresolved units, timezone and measurement rights. No underlying measurement redistribution or commercial-use authorization was established.
+
 ## Conditional benchmark acquisition: METR-LA / PEMS-BAY
 
 Use the [original DCRNN Data Preparation section](https://github.com/liyaguang/DCRNN#data-preparation) and its author-linked Google Drive or Baidu distribution. Download `metr-la.h5` first; optionally acquire `pems-bay.h5` for a second geography. Public web links exist, but actual binary download access was **not tested** here; Google/Baidu may impose authentication or quotas. Direct [Caltrans PeMS](https://pems.dot.ca.gov/) archive access requires an approved account.
 
 Before modeling, confirm source measurement-use rights; repository MIT code licensing does not by itself license every upstream measurement. Record version, bytes and SHA-256 in a separate benchmark manifest, and inspect timestamps, sensor count, units, missing-value encoding and quality masks. Preserve corresponding [sensor metadata](https://github.com/liyaguang/DCRNN/tree/master/data/sensor_graph) and row/column order. Review untrusted serialization before loading; do not execute arbitrary pickle files.
 
-Use a distinct local directory such as `data/raw/metr-la/`. Do not rename California observations as Pune data. These HDF5 files were not downloaded or inspected, and the Stage 7 **CSV/ZIP inspector does not support HDF5**. Stage 8 must add a deliberate HDF5 reader, with only the dependencies it needs, after dataset access and scope are confirmed.
+Use a distinct local directory such as `data/raw/metr-la/`. Do not rename California observations as Pune data. At Stage 7 these HDF5 files had not been downloaded or inspected. Stage 8A has now acquired METR-LA and added a separate HDF validator; PEMS-BAY remains unacquired. The original Stage 7 **CSV/ZIP inspector does not support HDF5** and is unchanged.
 
 ## Pune travel-time acquisition request
 
