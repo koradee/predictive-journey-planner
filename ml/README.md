@@ -1,6 +1,6 @@
 # Traffic data inspection
 
-This directory contains Stage 7 CSV inspection and Stage 8A METR-LA validation tools for **Predictive Journey Planner Using AI for Future Traffic and Route Optimization**. Stage 8B adds fitted research baselines and development-only validation; XGBoost and final-test evaluation remain blocked. There is no API or database.
+This directory contains Stage 7 CSV inspection and Stage 8A METR-LA validation tools for **Predictive Journey Planner Using AI for Future Traffic and Route Optimization**. Stage 8B added fitted research baselines; Stage 8C adds the explicit v2 feature contract and a gated XGBoost experiment. See the evaluation record for measured results. There is no API or database.
 
 - [Dataset feasibility and recommendation](../docs/dataset-feasibility.md)
 - [ML target, evaluation and routing specification](../docs/ml-problem-specification.md)
@@ -9,7 +9,7 @@ This directory contains Stage 7 CSV inspection and Stage 8A METR-LA validation t
 
 ## Requirements
 
-For the Stage 7 CSV inspector, use Python **3.11 or newer**. That inspector uses only the standard library; `requirements.txt` deliberately lists no third-party packages. The separate Stage 8A HDF validator uses NumPy and h5py, pinned in `requirements-metr-la.txt` (Python 3.12+ for the current NumPy pin). These packages were already installed in the validation environment. XGBoost remains uninstalled pending clarification of the frozen rolling-feature contract.
+For the Stage 7 CSV inspector, use Python **3.11 or newer**. That inspector uses only the standard library; `requirements.txt` deliberately lists no third-party packages. The separate Stage 8A HDF validator uses NumPy and h5py, pinned in `requirements-metr-la.txt` (Python 3.12+ for the current NumPy pin). These packages were already installed in the validation environment. Stage 8C training dependencies are pinned separately in `requirements-forecasting.txt`; only XGBoost needed installation in the recorded environment.
 
 From the repository root:
 
@@ -55,7 +55,7 @@ Omit `--output` to print JSON; supplied output must be outside raw/source direct
 
 Frontend checks remain in `frontend/`: `npm test`, `npm run lint`, `npm run build`. See the feasibility and Stage 8A reports for unresolved data limitations before attempting any training.
 
-## Stage 8B: development baselines (partial)
+## Stage 8B: development baselines (historical partial stage)
 
 See [the evaluation report and blocker](../docs/metr-la-evaluation.md) for actual validation results, provenance, scope limitations and required next steps. `forecasting.py` implements persistence, training-only historical averages, masked metrics and validated non-pickle artifact loading. `evaluate_metr_la.py` revalidates all source hashes and the frozen protocol before fitting; it exposes validation only and never scores final test targets.
 
@@ -64,4 +64,22 @@ python -m unittest discover -s ml -p "test_*.py" -v
 python ml/evaluate_metr_la.py --run-name stage8b-baselines
 ```
 
-Run names must be new: existing artifacts are not overwritten. Artifacts and detailed aggregate reports remain ignored under `data/processed/<run-name>/`. No new dependencies are needed beyond `requirements-metr-la.txt`. XGBoost fitting is blocked because the frozen protocol does not enumerate its rolling-summary operators; no feature set was invented and no final method has been selected. This is an offline Los Angeles sensor-speed benchmark, not Pune prediction or routing functionality.
+Run names must be new: existing artifacts are not overwritten. Artifacts and detailed aggregate reports remain ignored under `data/processed/<run-name>/`. No new dependencies are needed beyond `requirements-metr-la.txt`. At the end of Stage 8B, XGBoost fitting was blocked because v1 did not enumerate rolling-summary operators; no feature set was invented or final method selected in that stage. This is an offline Los Angeles sensor-speed benchmark, not Pune prediction or routing functionality.
+
+## Stage 8C: v2 XGBoost development and gated final evaluation
+
+The user-specified v2 contract resolves the rolling-feature ambiguity without changing v1. Read [the evaluation record](../docs/metr-la-evaluation.md#stage-8c-explicit-v2-feature-contract) and [the exact protocol](metr_la_protocol_v2.json) before reproducing.
+
+```sh
+python -m pip install -r ml/requirements-forecasting.txt
+python -m unittest discover -s ml -p "test_*.py" -v
+python ml/train_metr_la.py develop --run-name stage8c-v2
+# Only after development finishes and selection.json is frozen:
+python ml/train_metr_la.py final --run-name stage8c-v2
+```
+
+Use a new run name only for a deliberate reproduction; development never overwrites a run. The final command refuses changed code, protocol, dependencies or artifacts and creates an exclusive attempt marker before scoring. A failed final attempt must be investigated and documented, not silently retried. Final performance must never influence tuning or selection.
+
+`xgboost_forecasting.py` implements the 32 ordered features, native categorical sensor encoding, chunked arrays, JSON model loading and metrics. `train_metr_la.py` fits three full-data direct regressors sequentially, compares validation MAE, runs the full Python test suite and saves the selection before allowing final evaluation. All artifacts remain ignored under `data/processed/<run-name>/`, including per-sensor scores, runtime/configuration metadata and model JSON. No pickle deserialization is used. Dependencies are pinned; native floating-point results may still vary across platforms.
+
+This remains an offline Los Angeles sensor-speed benchmark. Native units, unknown source timezone/publication latency, unavailable zero targets and unresolved measurement-use rights remain explicit. There is no Pune prediction, routing, backend or frontend integration.

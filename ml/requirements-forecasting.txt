@@ -1,0 +1,9 @@
+# Stage 8C tested environment; Python 3.14.7. Inspection pins retained.
+numpy==2.5.4
+h5py==3.15.1
+xgboost==3.4.1
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+threadpoolctl==3.7.0
+narwhals==2.27.1
